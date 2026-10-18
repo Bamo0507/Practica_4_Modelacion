@@ -1,0 +1,2520 @@
+{
+  "generatedAtUtc": "2026-10-18T04:19:34.327495+00:00",
+  "algorithm": "Dijkstra",
+  "python": "3.14.7",
+  "platform": "macOS-15.1-arm64-arm-64bit-Mach-O",
+  "sourceSha256": {
+    "data/matriz_logistica.csv": "dca82c27d6f9705e678b75fbed7bcc1ddfe4d80026167a16c5e21495c6c5ac20",
+    "src/simulation/engine.py": "885b5435e6c3bd1e1259b36e90acf137303e6ddcfdabc1d1539e0c06753a40f0",
+    "src/simulation/experiments.py": "9ca81a4896edfe730a9fe27cd53b4b675314872fcff28eea8b4a5871641ceaf7",
+    "src/simulation/statistics.py": "c1510288f1a1c497eedec5be582127bed15cc96db5f608630a147c0291fccceb",
+    "src/simulation/routes.py": "a56d687321d57d05b07ab236fb17737d7b45d7ad7857a45f05f04ad13322f1cf",
+    "src/algorithms/dijkstra.py": "a81447f6560f1623411e0a699688a9afe9588911e112cb85f87770e99b43cc9b",
+    "src/ui/results.py": "ad8ddbba44e5c5ad46e03bfc61f8546d0dbfbcfcd592719f6e780053e3d04981"
+  },
+  "settings": {
+    "receivingHours": 8,
+    "repetitionsPerConfiguration": 5,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "vehicleCounts": [
+      8,
+      10,
+      12
+    ],
+    "seasonalRatesPerHour": {
+      "Normal": 4,
+      "Semana Santa": 6,
+      "Navidad": 10
+    },
+    "networkChanges": []
+  },
+  "measurementDefinitions": {
+    "timeUnit": "minutes",
+    "orderCounts": "Counts are totals over five repetitions; aggregate orders and timely are daily averages.",
+    "timeStatistics": "Average, median, minimum and maximum pool all individual orders across repetitions.",
+    "percent": "100 times total timely orders divided by total orders; deadline is request to completed delivery <= 75 minutes.",
+    "utilization": "Mean across repetitions of busy vehicle minutes inside the receiving window divided by fleet capacity in that window, times 100.",
+    "overtime": "Mean across repetitions of max(0, last vehicle return minus end of receiving window).",
+    "orderHash": "SHA256 of compact sorted-key JSON for ordered (identifier, arrival, destination) records; equal inputs across policies and fleet sizes within each season and seed."
+  },
+  "routes": {
+    "current": {
+      "N08": {
+        "outbound": [
+          "N01",
+          "N02",
+          "N03",
+          "N04",
+          "N05",
+          "N06",
+          "N07",
+          "N08"
+        ],
+        "inbound": [
+          "N08",
+          "N07",
+          "N06",
+          "N05",
+          "N04",
+          "N03",
+          "N02",
+          "N01"
+        ],
+        "outboundMinutes": 59.0,
+        "inboundMinutes": 59.0
+      },
+      "N19": {
+        "outbound": [
+          "N01",
+          "N02",
+          "N03",
+          "N11",
+          "N19"
+        ],
+        "inbound": [
+          "N19",
+          "N11",
+          "N03",
+          "N02",
+          "N01"
+        ],
+        "outboundMinutes": 33.0,
+        "inboundMinutes": 33.0
+      },
+      "N34": {
+        "outbound": [
+          "N01",
+          "N09",
+          "N17",
+          "N25",
+          "N33",
+          "N34"
+        ],
+        "inbound": [
+          "N34",
+          "N33",
+          "N25",
+          "N17",
+          "N09",
+          "N01"
+        ],
+        "outboundMinutes": 42.0,
+        "inboundMinutes": 42.0
+      },
+      "N40": {
+        "outbound": [
+          "N01",
+          "N02",
+          "N03",
+          "N04",
+          "N05",
+          "N06",
+          "N07",
+          "N08",
+          "N16",
+          "N24",
+          "N32",
+          "N40"
+        ],
+        "inbound": [
+          "N40",
+          "N32",
+          "N24",
+          "N16",
+          "N08",
+          "N07",
+          "N06",
+          "N05",
+          "N04",
+          "N03",
+          "N02",
+          "N01"
+        ],
+        "outboundMinutes": 93.0,
+        "inboundMinutes": 93.0
+      }
+    },
+    "proposed": {
+      "N08": {
+        "outbound": [
+          "N01",
+          "N09",
+          "N10",
+          "N11",
+          "N13",
+          "N22",
+          "N23",
+          "N07",
+          "N08"
+        ],
+        "inbound": [
+          "N08",
+          "N07",
+          "N06",
+          "N05",
+          "N04",
+          "N03",
+          "N02",
+          "N01"
+        ],
+        "outboundMinutes": 51.0,
+        "inboundMinutes": 59.0
+      },
+      "N19": {
+        "outbound": [
+          "N01",
+          "N02",
+          "N18",
+          "N19"
+        ],
+        "inbound": [
+          "N19",
+          "N18",
+          "N10",
+          "N09",
+          "N01"
+        ],
+        "outboundMinutes": 18.0,
+        "inboundMinutes": 24.0
+      },
+      "N34": {
+        "outbound": [
+          "N01",
+          "N17",
+          "N26",
+          "N34"
+        ],
+        "inbound": [
+          "N34",
+          "N26",
+          "N25",
+          "N17",
+          "N09",
+          "N01"
+        ],
+        "outboundMinutes": 24.0,
+        "inboundMinutes": 34.0
+      },
+      "N40": {
+        "outbound": [
+          "N01",
+          "N17",
+          "N25",
+          "N27",
+          "N29",
+          "N31",
+          "N32",
+          "N40"
+        ],
+        "inbound": [
+          "N40",
+          "N32",
+          "N31",
+          "N29",
+          "N27",
+          "N11",
+          "N10",
+          "N09",
+          "N01"
+        ],
+        "outboundMinutes": 47.0,
+        "inboundMinutes": 61.0
+      }
+    }
+  },
+  "configurations": [
+    {
+      "season": "Normal",
+      "vehicles": 8,
+      "ratePerHour": 4,
+      "repetitions": [
+        {
+          "seed": 42,
+          "ordersSha256": "0fa365753bc5fde4a0d6f66bd791f07e6959fff32e06d07f86bedd1f3489b90c",
+          "current": {
+            "orders": 36,
+            "timely": 21,
+            "timelyPercent": 58.333333333333336,
+            "waitStatistics": {
+              "average": 18.202926325794035,
+              "median": 12.227399504138788,
+              "minimum": 0.0,
+              "maximum": 63.341386266129206
+            },
+            "deliveryStatistics": {
+              "average": 70.20292632579404,
+              "median": 67.81925152446688,
+              "minimum": 33.0,
+              "maximum": 121.63557669455747
+            },
+            "utilizationPercent": 86.6361455086939,
+            "overtime": 114.86791667050261
+          },
+          "proposed": {
+            "orders": 36,
+            "timely": 36,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 3.2516365085833945,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 22.334472597946473
+            },
+            "deliveryStatistics": {
+              "average": 36.001636508583395,
+              "median": 35.61048914454943,
+              "minimum": 17.99999999999997,
+              "maximum": 67.91662539325829
+            },
+            "utilizationPercent": 66.48956359825314,
+            "overtime": 49.362899911197815
+          }
+        },
+        {
+          "seed": 43,
+          "ordersSha256": "9bf25aeed72c909f059b6ae2674854fa521e9b26bb35abdf81e41d425dca8501",
+          "current": {
+            "orders": 35,
+            "timely": 20,
+            "timelyPercent": 57.142857142857146,
+            "waitStatistics": {
+              "average": 17.740025588681185,
+              "median": 9.953199858100987,
+              "minimum": 0.0,
+              "maximum": 59.739183462627295
+            },
+            "deliveryStatistics": {
+              "average": 72.02573987439547,
+              "median": 68.95319985810099,
+              "minimum": 33.0,
+              "maximum": 137.2013912241726
+            },
+            "utilizationPercent": 88.71772117790046,
+            "overtime": 80.12349926549359
+          },
+          "proposed": {
+            "orders": 35,
+            "timely": 35,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 1.0310804214638283,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 12.124058705884522
+            },
+            "deliveryStatistics": {
+              "average": 36.259651850035254,
+              "median": 36.12405870588452,
+              "minimum": 17.999999999999996,
+              "maximum": 53.8276453783667
+            },
+            "utilizationPercent": 69.3817188338428,
+            "overtime": 36.07977400017364
+          }
+        },
+        {
+          "seed": 44,
+          "ordersSha256": "d8a94fea238ed765b934847d5a03833e503cb75eb466f162191166733b6a87cd",
+          "current": {
+            "orders": 38,
+            "timely": 14,
+            "timelyPercent": 36.8421052631579,
+            "waitStatistics": {
+              "average": 27.318116268667627,
+              "median": 25.12063544884336,
+              "minimum": 0.0,
+              "maximum": 80.75489717528285
+            },
+            "deliveryStatistics": {
+              "average": 87.31811626866762,
+              "median": 86.83024899991051,
+              "minimum": 33.0,
+              "maximum": 171.27390742963775
+            },
+            "utilizationPercent": 89.88138150676882,
+            "overtime": 232.47967778140423
+          },
+          "proposed": {
+            "orders": 38,
+            "timely": 36,
+            "timelyPercent": 94.73684210526316,
+            "waitStatistics": {
+              "average": 3.0696150280654972,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 31.113824526041185
+            },
+            "deliveryStatistics": {
+              "average": 40.83277292280234,
+              "median": 47.0,
+              "minimum": 18.0,
+              "maximum": 79.49666401019086
+            },
+            "utilizationPercent": 73.66316912892601,
+            "overtime": 109.61637154341054
+          }
+        },
+        {
+          "seed": 45,
+          "ordersSha256": "089dad95947f89a8a5fdb9cab128ff2f40c53b11b5b78c3c6dcdaa9ee2829b35",
+          "current": {
+            "orders": 36,
+            "timely": 21,
+            "timelyPercent": 58.333333333333336,
+            "waitStatistics": {
+              "average": 16.48714368951826,
+              "median": 9.098095562127725,
+              "minimum": 0.0,
+              "maximum": 57.33003461836175
+            },
+            "deliveryStatistics": {
+              "average": 69.87603257840715,
+              "median": 68.96210439822475,
+              "minimum": 33.0,
+              "maximum": 131.95649003896935
+            },
+            "utilizationPercent": 91.13394549454156,
+            "overtime": 130.28690468460354
+          },
+          "proposed": {
+            "orders": 36,
+            "timely": 36,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 3.251046280498421,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 32.39292736729615
+            },
+            "deliveryStatistics": {
+              "average": 35.445490724942864,
+              "median": 39.334013932693566,
+              "minimum": 18.0,
+              "maximum": 55.950854449654074
+            },
+            "utilizationPercent": 64.02056112281055,
+            "overtime": 97.93894300136799
+          }
+        },
+        {
+          "seed": 46,
+          "ordersSha256": "3aab9a1f29629257f36d60882658214c807708ca3d2dfb0d430617a68226e3df",
+          "current": {
+            "orders": 28,
+            "timely": 16,
+            "timelyPercent": 57.142857142857146,
+            "waitStatistics": {
+              "average": 4.683351805056887,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 44.73442145019976
+            },
+            "deliveryStatistics": {
+              "average": 66.36192323362832,
+              "median": 59.0,
+              "minimum": 33.0,
+              "maximum": 103.73442145019976
+            },
+            "utilizationPercent": 70.62186149425013,
+            "overtime": 160.4966692394181
+          },
+          "proposed": {
+            "orders": 28,
+            "timely": 28,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.0,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.0
+            },
+            "deliveryStatistics": {
+              "average": 37.49999999999999,
+              "median": 46.999999999999986,
+              "minimum": 18.0,
+              "maximum": 51.0
+            },
+            "utilizationPercent": 50.9366641980883,
+            "overtime": 107.76224778921835
+          }
+        }
+      ],
+      "summaries": {
+        "current": {
+          "totalOrders": 173,
+          "totalTimely": 92,
+          "orders": 34.6,
+          "timely": 18.4,
+          "percent": 53.179190751445084,
+          "wait": 17.566275635295067,
+          "waitMedian": 4.80667908322738,
+          "waitMinimum": 0.0,
+          "waitMaximum": 80.75489717528285,
+          "delivery": 73.64142014396559,
+          "deliveryMedian": 72.33728050089277,
+          "deliveryMinimum": 33.0,
+          "deliveryMaximum": 171.27390742963775,
+          "utilization": 85.39821103643098,
+          "overtime": 143.6509335282844
+        },
+        "proposed": {
+          "totalOrders": 173,
+          "totalTimely": 171,
+          "orders": 34.6,
+          "timely": 34.2,
+          "percent": 98.84393063583815,
+          "wait": 2.236010209391146,
+          "waitMedian": 0.0,
+          "waitMinimum": 0.0,
+          "waitMaximum": 32.39292736729615,
+          "delivery": 37.24179055621195,
+          "deliveryMedian": 46.99999999999997,
+          "deliveryMinimum": 17.99999999999997,
+          "deliveryMaximum": 79.49666401019086,
+          "utilization": 64.89833537638415,
+          "overtime": 80.15204724907366
+        }
+      }
+    },
+    {
+      "season": "Semana Santa",
+      "vehicles": 8,
+      "ratePerHour": 6,
+      "repetitions": [
+        {
+          "seed": 42,
+          "ordersSha256": "7d488fb68556274e89114608654d3caf5fe4c70c0b53a32ae8e699d7bda5b60b",
+          "current": {
+            "orders": 57,
+            "timely": 7,
+            "timelyPercent": 12.280701754385966,
+            "waitStatistics": {
+              "average": 107.19824264297087,
+              "median": 97.55631506529765,
+              "minimum": 0.0,
+              "maximum": 248.38820608389807
+            },
+            "deliveryStatistics": {
+              "average": 160.3912250991112,
+              "median": 151.26945064063932,
+              "minimum": 33.0,
+              "maximum": 320.2708132800082
+            },
+            "utilizationPercent": 93.54221932144911,
+            "overtime": 382.0060556182724
+          },
+          "proposed": {
+            "orders": 57,
+            "timely": 44,
+            "timelyPercent": 77.19298245614036,
+            "waitStatistics": {
+              "average": 24.25181951480286,
+              "median": 23.48913847888022,
+              "minimum": 0.0,
+              "maximum": 69.0090452558473
+            },
+            "deliveryStatistics": {
+              "average": 58.18164407620637,
+              "median": 57.315329621196184,
+              "minimum": 18.0,
+              "maximum": 120.0090452558473
+            },
+            "utilizationPercent": 91.93818274998843,
+            "overtime": 127.09653157220669
+          }
+        },
+        {
+          "seed": 43,
+          "ordersSha256": "f6533e31b07eaa4d3fb61338a0f9daae069bc3bd943de1ebb4b4b0cdfb66b6b7",
+          "current": {
+            "orders": 50,
+            "timely": 8,
+            "timelyPercent": 16.0,
+            "waitStatistics": {
+              "average": 89.12639686540433,
+              "median": 115.31942289808822,
+              "minimum": 0.0,
+              "maximum": 151.23915682429202
+            },
+            "deliveryStatistics": {
+              "average": 142.58639686540434,
+              "median": 158.66186719417195,
+              "minimum": 33.0,
+              "maximum": 240.84175315592523
+            },
+            "utilizationPercent": 93.81048998639426,
+            "overtime": 306.3078038384625
+          },
+          "proposed": {
+            "orders": 50,
+            "timely": 44,
+            "timelyPercent": 88.0,
+            "waitStatistics": {
+              "average": 17.966646473705566,
+              "median": 14.044152819600683,
+              "minimum": 0.0,
+              "maximum": 59.407221482282296
+            },
+            "deliveryStatistics": {
+              "average": 51.38664647370557,
+              "median": 51.0,
+              "minimum": 18.0,
+              "maximum": 107.51340140310924
+            },
+            "utilizationPercent": 90.18491967658504,
+            "overtime": 89.09142581045637
+          }
+        },
+        {
+          "seed": 44,
+          "ordersSha256": "1740e780940745df59674502f84baad9bbe2009567c473174c373bc758ca2b4d",
+          "current": {
+            "orders": 52,
+            "timely": 6,
+            "timelyPercent": 11.538461538461538,
+            "waitStatistics": {
+              "average": 134.31718648311602,
+              "median": 120.5556603375264,
+              "minimum": 0.0,
+              "maximum": 296.7776895531241
+            },
+            "deliveryStatistics": {
+              "average": 194.35564802157754,
+              "median": 188.88866335414644,
+              "minimum": 33.0,
+              "maximum": 377.2398537050632
+            },
+            "utilizationPercent": 93.77878439622734,
+            "overtime": 419.3623720254683
+          },
+          "proposed": {
+            "orders": 52,
+            "timely": 24,
+            "timelyPercent": 46.15384615384615,
+            "waitStatistics": {
+              "average": 40.090964040956514,
+              "median": 45.46544582092821,
+              "minimum": 0.0,
+              "maximum": 89.93141877940457
+            },
+            "deliveryStatistics": {
+              "average": 77.76404096403344,
+              "median": 78.60015346884634,
+              "minimum": 18.0,
+              "maximum": 126.81916711180793
+            },
+            "utilizationPercent": 93.77878439622734,
+            "overtime": 129.25154255483767
+          }
+        },
+        {
+          "seed": 45,
+          "ordersSha256": "472408f256b8fd553938798b1710716288758c2d98f4e3511d1de135afe13a4d",
+          "current": {
+            "orders": 54,
+            "timely": 6,
+            "timelyPercent": 11.11111111111111,
+            "waitStatistics": {
+              "average": 88.86542039944686,
+              "median": 91.03883559667952,
+              "minimum": 0.0,
+              "maximum": 218.74965973689598
+            },
+            "deliveryStatistics": {
+              "average": 142.66171669574317,
+              "median": 142.15327093172414,
+              "minimum": 33.0,
+              "maximum": 277.749659736896
+            },
+            "utilizationPercent": 97.15317615950943,
+            "overtime": 327.7197446713303
+          },
+          "proposed": {
+            "orders": 54,
+            "timely": 53,
+            "timelyPercent": 98.14814814814815,
+            "waitStatistics": {
+              "average": 12.140832209879123,
+              "median": 6.479642042545635,
+              "minimum": 0.0,
+              "maximum": 49.595284911530754
+            },
+            "deliveryStatistics": {
+              "average": 44.751943320990236,
+              "median": 47.02638395093284,
+              "minimum": 18.0,
+              "maximum": 94.03164647965343
+            },
+            "utilizationPercent": 88.4515408926687,
+            "overtime": 141.13992319915974
+          }
+        },
+        {
+          "seed": 46,
+          "ordersSha256": "4f1878450ede00b760f5e568497011312be43c12b59a1d6b69a2e5cfd90aabd6",
+          "current": {
+            "orders": 52,
+            "timely": 9,
+            "timelyPercent": 17.307692307692307,
+            "waitStatistics": {
+              "average": 110.94308701784267,
+              "median": 104.92898169171065,
+              "minimum": 0.0,
+              "maximum": 275.22949513010536
+            },
+            "deliveryStatistics": {
+              "average": 171.8084716332273,
+              "median": 156.0555085852401,
+              "minimum": 33.0,
+              "maximum": 363.7994864402949
+            },
+            "utilizationPercent": 88.43703566339089,
+            "overtime": 450.23955849259585
+          },
+          "proposed": {
+            "orders": 52,
+            "timely": 31,
+            "timelyPercent": 59.61538461538461,
+            "waitStatistics": {
+              "average": 34.09042407082709,
+              "median": 12.128030523752344,
+              "minimum": 0.0,
+              "maximum": 110.10724076248289
+            },
+            "deliveryStatistics": {
+              "average": 70.68657791698094,
+              "median": 54.51949270283987,
+              "minimum": 18.0,
+              "maximum": 157.1072407624829
+            },
+            "utilizationPercent": 80.1537766902832,
+            "overtime": 196.9214022302582
+          }
+        }
+      ],
+      "summaries": {
+        "current": {
+          "totalOrders": 265,
+          "totalTimely": 36,
+          "orders": 53.0,
+          "timely": 7.2,
+          "percent": 13.584905660377359,
+          "wait": 106.10900602845109,
+          "waitMedian": 102.57982147217052,
+          "waitMinimum": 0.0,
+          "waitMaximum": 296.7776895531241,
+          "delivery": 162.32410036807372,
+          "deliveryMedian": 153.43664559091172,
+          "deliveryMinimum": 33.0,
+          "deliveryMaximum": 377.2398537050632,
+          "utilization": 93.34434110539421,
+          "overtime": 377.1271069292259
+        },
+        "proposed": {
+          "totalOrders": 265,
+          "totalTimely": 196,
+          "orders": 53.0,
+          "timely": 39.2,
+          "percent": 73.9622641509434,
+          "wait": 25.636691159151933,
+          "waitMedian": 17.77680225419033,
+          "waitMinimum": 0.0,
+          "waitMaximum": 110.10724076248289,
+          "delivery": 60.459332668585894,
+          "deliveryMedian": 55.56974533554495,
+          "deliveryMinimum": 18.0,
+          "deliveryMaximum": 157.1072407624829,
+          "utilization": 88.90144088115053,
+          "overtime": 136.70016507338374
+        }
+      }
+    },
+    {
+      "season": "Navidad",
+      "vehicles": 8,
+      "ratePerHour": 10,
+      "repetitions": [
+        {
+          "seed": 42,
+          "ordersSha256": "1ae61453c3a2d64b6a4f4a0a35cdec696996a0abb2aa8aceb95aba8dac8de2f5",
+          "current": {
+            "orders": 86,
+            "timely": 7,
+            "timelyPercent": 8.13953488372093,
+            "waitStatistics": {
+              "average": 301.88317525870565,
+              "median": 275.83931950192937,
+              "minimum": 0.0,
+              "maximum": 625.3200081684662
+            },
+            "deliveryStatistics": {
+              "average": 355.685500840101,
+              "median": 339.8202083895374,
+              "minimum": 33.0,
+              "maximum": 714.5821477580089
+            },
+            "utilizationPercent": 96.12533159286947,
+            "overtime": 786.4941903460158
+          },
+          "proposed": {
+            "orders": 86,
+            "timely": 11,
+            "timelyPercent": 12.790697674418604,
+            "waitStatistics": {
+              "average": 160.22491490790944,
+              "median": 139.8459226940077,
+              "minimum": 0.0,
+              "maximum": 314.1055391745883
+            },
+            "deliveryStatistics": {
+              "average": 193.4342172334908,
+              "median": 181.03371915731145,
+              "minimum": 18.0,
+              "maximum": 359.64110954496607
+            },
+            "utilizationPercent": 96.12533159286947,
+            "overtime": 394.4941903460158
+          }
+        },
+        {
+          "seed": 43,
+          "ordersSha256": "b8774c9e053ffe24d7ae34e117e0d43faa1bd14793cba81108f03f1201a8144c",
+          "current": {
+            "orders": 79,
+            "timely": 8,
+            "timelyPercent": 10.126582278481013,
+            "waitStatistics": {
+              "average": 266.58902903865845,
+              "median": 276.159066284374,
+              "minimum": 0.0,
+              "maximum": 549.4378439260232
+            },
+            "deliveryStatistics": {
+              "average": 319.88016827916476,
+              "median": 315.6053400765982,
+              "minimum": 33.0,
+              "maximum": 642.4378439260232
+            },
+            "utilizationPercent": 96.28629399183656,
+            "overtime": 722.0424428426368
+          },
+          "proposed": {
+            "orders": 79,
+            "timely": 12,
+            "timelyPercent": 15.189873417721518,
+            "waitStatistics": {
+              "average": 133.5204964168434,
+              "median": 142.59595085831427,
+              "minimum": 0.0,
+              "maximum": 262.64739567185785
+            },
+            "deliveryStatistics": {
+              "average": 167.06480021431173,
+              "median": 172.05999618627646,
+              "minimum": 18.0,
+              "maximum": 311.8561407441674
+            },
+            "utilizationPercent": 96.28629399183656,
+            "overtime": 353.9333418073959
+          }
+        },
+        {
+          "seed": 44,
+          "ordersSha256": "427e732da65c355ee835e3fbcfc08c0020f6557fbfd1a425bb98ac5f2e7b5807",
+          "current": {
+            "orders": 91,
+            "timely": 5,
+            "timelyPercent": 5.4945054945054945,
+            "waitStatistics": {
+              "average": 394.49877083601643,
+              "median": 402.58808499623854,
+              "minimum": 0.0,
+              "maximum": 831.6235810629977
+            },
+            "deliveryStatistics": {
+              "average": 453.1910785283241,
+              "median": 468.8433772876086,
+              "minimum": 33.0,
+              "maximum": 873.6235810629977
+            },
+            "utilizationPercent": 96.2672706377364,
+            "overtime": 922.5945970565965
+          },
+          "proposed": {
+            "orders": 91,
+            "timely": 9,
+            "timelyPercent": 9.89010989010989,
+            "waitStatistics": {
+              "average": 211.71272076939454,
+              "median": 220.13611622314798,
+              "minimum": 0.0,
+              "maximum": 432.2051288579163
+            },
+            "deliveryStatistics": {
+              "average": 247.65777571444949,
+              "median": 264.85916300420956,
+              "minimum": 18.000000000000004,
+              "maximum": 473.6323292419695
+            },
+            "utilizationPercent": 96.2672706377364,
+            "overtime": 514.5945970565965
+          }
+        },
+        {
+          "seed": 45,
+          "ordersSha256": "88170a64643f51a9819b5d0dd09c93d6aff0ff3a5652f1fd72d1e2fbe077f9f6",
+          "current": {
+            "orders": 88,
+            "timely": 6,
+            "timelyPercent": 6.818181818181818,
+            "waitStatistics": {
+              "average": 313.8505955711715,
+              "median": 268.58975913611164,
+              "minimum": 0.0,
+              "maximum": 662.7862060583955
+            },
+            "deliveryStatistics": {
+              "average": 370.02105011662604,
+              "median": 341.71483792584456,
+              "minimum": 33.0,
+              "maximum": 755.7862060583955
+            },
+            "utilizationPercent": 98.29190569570567,
+            "overtime": 848.186425259488
+          },
+          "proposed": {
+            "orders": 88,
+            "timely": 13,
+            "timelyPercent": 14.772727272727273,
+            "waitStatistics": {
+              "average": 150.53227583443658,
+              "median": 121.02743069142421,
+              "minimum": 0.0,
+              "maximum": 321.5829592036756
+            },
+            "deliveryStatistics": {
+              "average": 184.61182128898201,
+              "median": 152.44562414031978,
+              "minimum": 18.0,
+              "maximum": 368.5829592036756
+            },
+            "utilizationPercent": 98.29190569570567,
+            "overtime": 414.91476187384137
+          }
+        },
+        {
+          "seed": 46,
+          "ordersSha256": "435d89236c98dafd817bbf87b06b968c0753846488e51cce917e1531567668a1",
+          "current": {
+            "orders": 92,
+            "timely": 6,
+            "timelyPercent": 6.521739130434782,
+            "waitStatistics": {
+              "average": 414.62158945683353,
+              "median": 375.80744364929205,
+              "minimum": 0.0,
+              "maximum": 884.5487136601483
+            },
+            "deliveryStatistics": {
+              "average": 475.0020242394423,
+              "median": 455.11351020069753,
+              "minimum": 32.99999999999999,
+              "maximum": 975.6427642250901
+            },
+            "utilizationPercent": 93.09866645853982,
+            "overtime": 1043.2391213573421
+          },
+          "proposed": {
+            "orders": 92,
+            "timely": 15,
+            "timelyPercent": 16.304347826086957,
+            "waitStatistics": {
+              "average": 216.83443226113934,
+              "median": 183.77342143007064,
+              "minimum": 0.0,
+              "maximum": 486.64276422509005
+            },
+            "deliveryStatistics": {
+              "average": 253.99747573940022,
+              "median": 233.15642587526582,
+              "minimum": 18.0,
+              "maximum": 533.6427642250901
+            },
+            "utilizationPercent": 93.09866645853982,
+            "overtime": 578.4976555010314
+          }
+        }
+      ],
+      "summaries": {
+        "current": {
+          "totalOrders": 436,
+          "totalTimely": 32,
+          "orders": 87.2,
+          "timely": 6.4,
+          "percent": 7.339449541284404,
+          "wait": 341.02273658869717,
+          "waitMedian": 312.58534971842255,
+          "waitMinimum": 0.0,
+          "waitMaximum": 884.5487136601483,
+          "delivery": 397.61906686392655,
+          "deliveryMedian": 372.3896128176529,
+          "deliveryMinimum": 32.99999999999999,
+          "deliveryMaximum": 975.6427642250901,
+          "utilization": 96.01389367533758,
+          "overtime": 864.5113553724159
+        },
+        "proposed": {
+          "totalOrders": 436,
+          "totalTimely": 60,
+          "orders": 87.2,
+          "timely": 12.0,
+          "percent": 13.761467889908257,
+          "wait": 176.12139341853435,
+          "waitMedian": 162.68373346709978,
+          "waitMinimum": 0.0,
+          "waitMaximum": 486.64276422509005,
+          "delivery": 210.97231084972702,
+          "deliveryMedian": 189.5977710255725,
+          "deliveryMinimum": 18.0,
+          "deliveryMaximum": 533.6427642250901,
+          "utilization": 96.01389367533758,
+          "overtime": 451.2869093169762
+        }
+      }
+    },
+    {
+      "season": "Normal",
+      "vehicles": 10,
+      "ratePerHour": 4,
+      "repetitions": [
+        {
+          "seed": 42,
+          "ordersSha256": "0fa365753bc5fde4a0d6f66bd791f07e6959fff32e06d07f86bedd1f3489b90c",
+          "current": {
+            "orders": 36,
+            "timely": 29,
+            "timelyPercent": 80.55555555555556,
+            "waitStatistics": {
+              "average": 3.8044552123055655,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 24.68527931531733
+            },
+            "deliveryStatistics": {
+              "average": 55.80445521230556,
+              "median": 53.49953377668527,
+              "minimum": 32.99999999999997,
+              "maximum": 93.0
+            },
+            "utilizationPercent": 70.41496590076417,
+            "overtime": 103.93876070081546
+          },
+          "proposed": {
+            "orders": 36,
+            "timely": 36,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.25711040054144463,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 5.9544764200613685
+            },
+            "deliveryStatistics": {
+              "average": 33.00711040054144,
+              "median": 24.0,
+              "minimum": 17.99999999999997,
+              "maximum": 51.0
+            },
+            "utilizationPercent": 53.19165087860251,
+            "overtime": 49.362899911197815
+          }
+        },
+        {
+          "seed": 43,
+          "ordersSha256": "9bf25aeed72c909f059b6ae2674854fa521e9b26bb35abdf81e41d425dca8501",
+          "current": {
+            "orders": 35,
+            "timely": 28,
+            "timelyPercent": 80.0,
+            "waitStatistics": {
+              "average": 2.1308380973862246,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 22.564643953303573
+            },
+            "deliveryStatistics": {
+              "average": 56.41655238310051,
+              "median": 59.0,
+              "minimum": 33.0,
+              "maximum": 93.00000000000003
+            },
+            "utilizationPercent": 74.31608808740347,
+            "overtime": 55.73098422067574
+          },
+          "proposed": {
+            "orders": 35,
+            "timely": 35,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.0,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.0
+            },
+            "deliveryStatistics": {
+              "average": 35.22857142857143,
+              "median": 24.0,
+              "minimum": 17.999999999999996,
+              "maximum": 51.00000000000003
+            },
+            "utilizationPercent": 55.50537506707424,
+            "overtime": 36.07977400017364
+          }
+        },
+        {
+          "seed": 44,
+          "ordersSha256": "d8a94fea238ed765b934847d5a03833e503cb75eb466f162191166733b6a87cd",
+          "current": {
+            "orders": 38,
+            "timely": 25,
+            "timelyPercent": 65.78947368421052,
+            "waitStatistics": {
+              "average": 4.354649242253204,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 38.2100379275721
+            },
+            "deliveryStatistics": {
+              "average": 64.3546492422532,
+              "median": 59.0,
+              "minimum": 33.0,
+              "maximum": 129.45472970608762
+            },
+            "utilizationPercent": 77.3726645043808,
+            "overtime": 190.67333954630385
+          },
+          "proposed": {
+            "orders": 38,
+            "timely": 38,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.27512446594967416,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 10.454729706087619
+            },
+            "deliveryStatistics": {
+              "average": 38.038282360686516,
+              "median": 47.0,
+              "minimum": 18.0,
+              "maximum": 57.45472970608762
+            },
+            "utilizationPercent": 59.257319143324516,
+            "overtime": 109.61637154341054
+          }
+        },
+        {
+          "seed": 45,
+          "ordersSha256": "089dad95947f89a8a5fdb9cab128ff2f40c53b11b5b78c3c6dcdaa9ee2829b35",
+          "current": {
+            "orders": 36,
+            "timely": 28,
+            "timelyPercent": 77.77777777777777,
+            "waitStatistics": {
+              "average": 2.117373792954794,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 31.278448781363203
+            },
+            "deliveryStatistics": {
+              "average": 55.50626268184369,
+              "median": 49.05309480510093,
+              "minimum": 32.99999999999999,
+              "maximum": 93.00000000000003
+            },
+            "utilizationPercent": 73.30352857989847,
+            "overtime": 123.8501552865456
+          },
+          "proposed": {
+            "orders": 36,
+            "timely": 36,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.2021791328156445,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 7.278448781363203
+            },
+            "deliveryStatistics": {
+              "average": 32.39662357726009,
+              "median": 24.0,
+              "minimum": 18.0,
+              "maximum": 51.0
+            },
+            "utilizationPercent": 51.21644889824844,
+            "overtime": 97.93894300136799
+          }
+        },
+        {
+          "seed": 46,
+          "ordersSha256": "3aab9a1f29629257f36d60882658214c807708ca3d2dfb0d430617a68226e3df",
+          "current": {
+            "orders": 28,
+            "timely": 18,
+            "timelyPercent": 64.28571428571429,
+            "waitStatistics": {
+              "average": 0.8220101628647042,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 23.016284560211716
+            },
+            "deliveryStatistics": {
+              "average": 62.500581591436124,
+              "median": 59.0,
+              "minimum": 33.0,
+              "maximum": 93.0
+            },
+            "utilizationPercent": 56.84937607925452,
+            "overtime": 138.77853234943007
+          },
+          "proposed": {
+            "orders": 28,
+            "timely": 28,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.0,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.0
+            },
+            "deliveryStatistics": {
+              "average": 37.49999999999999,
+              "median": 46.999999999999986,
+              "minimum": 18.0,
+              "maximum": 51.0
+            },
+            "utilizationPercent": 40.74933135847064,
+            "overtime": 107.76224778921835
+          }
+        }
+      ],
+      "summaries": {
+        "current": {
+          "totalOrders": 173,
+          "totalTimely": 128,
+          "orders": 34.6,
+          "timely": 25.6,
+          "percent": 73.98843930635839,
+          "wait": 2.7529371870735506,
+          "waitMedian": 0.0,
+          "waitMinimum": 0.0,
+          "waitMaximum": 38.2100379275721,
+          "delivery": 58.82808169574407,
+          "deliveryMedian": 58.999999999999986,
+          "deliveryMinimum": 32.99999999999997,
+          "deliveryMaximum": 129.45472970608762,
+          "utilization": 70.45132463034028,
+          "overtime": 122.59435442075414
+        },
+        "proposed": {
+          "totalOrders": 173,
+          "totalTimely": 173,
+          "orders": 34.6,
+          "timely": 34.6,
+          "percent": 100.0,
+          "wait": 0.15600666420198167,
+          "waitMedian": 0.0,
+          "waitMinimum": 0.0,
+          "waitMaximum": 10.454729706087619,
+          "delivery": 35.16178701102279,
+          "deliveryMedian": 31.278448781363203,
+          "deliveryMinimum": 17.99999999999997,
+          "deliveryMaximum": 57.45472970608762,
+          "utilization": 51.98402506914407,
+          "overtime": 80.15204724907366
+        }
+      }
+    },
+    {
+      "season": "Semana Santa",
+      "vehicles": 10,
+      "ratePerHour": 6,
+      "repetitions": [
+        {
+          "seed": 42,
+          "ordersSha256": "7d488fb68556274e89114608654d3caf5fe4c70c0b53a32ae8e699d7bda5b60b",
+          "current": {
+            "orders": 57,
+            "timely": 17,
+            "timelyPercent": 29.82456140350877,
+            "waitStatistics": {
+              "average": 41.190202076757515,
+              "median": 37.72993365503612,
+              "minimum": 0.0,
+              "maximum": 109.95281716739777
+            },
+            "deliveryStatistics": {
+              "average": 94.38318453289786,
+              "median": 85.38967629046078,
+              "minimum": 33.0,
+              "maximum": 190.96813442486336
+            },
+            "utilizationPercent": 91.93220178639788,
+            "overtime": 241.531920488707
+          },
+          "proposed": {
+            "orders": 57,
+            "timely": 56,
+            "timelyPercent": 98.24561403508773,
+            "waitStatistics": {
+              "average": 7.381720691803809,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 38.41940092173745
+            },
+            "deliveryStatistics": {
+              "average": 41.31154525320731,
+              "median": 45.58144269537058,
+              "minimum": 18.0,
+              "maximum": 76.48079693368464
+            },
+            "utilizationPercent": 77.82894874947084,
+            "overtime": 109.95946393817792
+          }
+        },
+        {
+          "seed": 43,
+          "ordersSha256": "f6533e31b07eaa4d3fb61338a0f9daae069bc3bd943de1ebb4b4b0cdfb66b6b7",
+          "current": {
+            "orders": 50,
+            "timely": 21,
+            "timelyPercent": 42.0,
+            "waitStatistics": {
+              "average": 28.86491188254728,
+              "median": 22.17902430429737,
+              "minimum": 0.0,
+              "maximum": 91.60065131361807
+            },
+            "deliveryStatistics": {
+              "average": 82.32491188254728,
+              "median": 82.9375318125328,
+              "minimum": 33.0,
+              "maximum": 143.34645535805143
+            },
+            "utilizationPercent": 92.27138788982208,
+            "overtime": 181.52859004395611
+          },
+          "proposed": {
+            "orders": 50,
+            "timely": 50,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 1.900290365634352,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 15.921957177472052
+            },
+            "deliveryStatistics": {
+              "average": 35.32029036563435,
+              "median": 28.795474427438464,
+              "minimum": 18.0,
+              "maximum": 60.467594149448445
+            },
+            "utilizationPercent": 72.33526755468787,
+            "overtime": 89.09142581045637
+          }
+        },
+        {
+          "seed": 44,
+          "ordersSha256": "1740e780940745df59674502f84baad9bbe2009567c473174c373bc758ca2b4d",
+          "current": {
+            "orders": 52,
+            "timely": 14,
+            "timelyPercent": 26.923076923076923,
+            "waitStatistics": {
+              "average": 57.99694830446783,
+              "median": 57.229611618309065,
+              "minimum": 0.0,
+              "maximum": 150.10647964639952
+            },
+            "deliveryStatistics": {
+              "average": 118.03540984292937,
+              "median": 111.54696323448485,
+              "minimum": 33.0,
+              "maximum": 236.74494370525827
+            },
+            "utilizationPercent": 93.08174389198865,
+            "overtime": 278.8674620256634
+          },
+          "proposed": {
+            "orders": 52,
+            "timely": 51,
+            "timelyPercent": 98.07692307692308,
+            "waitStatistics": {
+              "average": 5.151329359996584,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 38.18260495309184
+            },
+            "deliveryStatistics": {
+              "average": 42.82440628307351,
+              "median": 47.0,
+              "minimum": 18.0,
+              "maximum": 85.18260495309184
+            },
+            "utilizationPercent": 86.55991679465285,
+            "overtime": 73.02570265152349
+          }
+        },
+        {
+          "seed": 45,
+          "ordersSha256": "472408f256b8fd553938798b1710716288758c2d98f4e3511d1de135afe13a4d",
+          "current": {
+            "orders": 54,
+            "timely": 30,
+            "timelyPercent": 55.55555555555556,
+            "waitStatistics": {
+              "average": 21.87482666352819,
+              "median": 23.97593769466245,
+              "minimum": 0.0,
+              "maximum": 51.76292706866781
+            },
+            "deliveryStatistics": {
+              "average": 75.67112295982449,
+              "median": 73.02164860935628,
+              "minimum": 33.0,
+              "maximum": 140.2690520688033
+            },
+            "utilizationPercent": 96.36147861319701,
+            "overtime": 203.86768860258564
+          },
+          "proposed": {
+            "orders": 54,
+            "timely": 54,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 2.234843692345148,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 22.22002307890783
+            },
+            "deliveryStatistics": {
+              "average": 34.84595480345626,
+              "median": 32.643582340516694,
+              "minimum": 18.0,
+              "maximum": 68.74219726835395
+            },
+            "utilizationPercent": 71.96278690189288,
+            "overtime": 115.85047398786025
+          }
+        },
+        {
+          "seed": 46,
+          "ordersSha256": "4f1878450ede00b760f5e568497011312be43c12b59a1d6b69a2e5cfd90aabd6",
+          "current": {
+            "orders": 52,
+            "timely": 15,
+            "timelyPercent": 28.846153846153847,
+            "waitStatistics": {
+              "average": 54.09347894166562,
+              "median": 43.70176897355009,
+              "minimum": 0.0,
+              "maximum": 154.8459741142321
+            },
+            "deliveryStatistics": {
+              "average": 114.95886355705024,
+              "median": 108.02874824254388,
+              "minimum": 33.0,
+              "maximum": 247.8459741142321
+            },
+            "utilizationPercent": 82.55560337242468,
+            "overtime": 335.85235489961997
+          },
+          "proposed": {
+            "orders": 52,
+            "timely": 47,
+            "timelyPercent": 90.38461538461539,
+            "waitStatistics": {
+              "average": 13.159581933435444,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 48.80374528477063
+            },
+            "deliveryStatistics": {
+              "average": 49.75573577958929,
+              "median": 48.59325021399289,
+              "minimum": 18.0,
+              "maximum": 99.80374528477063
+            },
+            "utilizationPercent": 70.98291738616969,
+            "overtime": 143.21482073551226
+          }
+        }
+      ],
+      "summaries": {
+        "current": {
+          "totalOrders": 265,
+          "totalTimely": 97,
+          "orders": 53.0,
+          "timely": 19.4,
+          "percent": 36.60377358490566,
+          "wait": 40.7586036571019,
+          "waitMedian": 30.551396627495308,
+          "waitMinimum": 0.0,
+          "waitMaximum": 154.8459741142321,
+          "delivery": 96.97369799672454,
+          "deliveryMedian": 93.0,
+          "deliveryMinimum": 33.0,
+          "deliveryMaximum": 247.8459741142321,
+          "utilization": 91.24048311076606,
+          "overtime": 248.3296032121064
+        },
+        "proposed": {
+          "totalOrders": 265,
+          "totalTimely": 258,
+          "orders": 53.0,
+          "timely": 51.6,
+          "percent": 97.35849056603773,
+          "wait": 5.994798280602408,
+          "waitMedian": 0.0,
+          "waitMinimum": 0.0,
+          "waitMaximum": 48.80374528477063,
+          "delivery": 40.81743979003637,
+          "deliveryMedian": 47.0,
+          "deliveryMinimum": 18.0,
+          "deliveryMaximum": 99.80374528477063,
+          "utilization": 75.93396747737482,
+          "overtime": 106.22837742470605
+        }
+      }
+    },
+    {
+      "season": "Navidad",
+      "vehicles": 10,
+      "ratePerHour": 10,
+      "repetitions": [
+        {
+          "seed": 42,
+          "ordersSha256": "1ae61453c3a2d64b6a4f4a0a35cdec696996a0abb2aa8aceb95aba8dac8de2f5",
+          "current": {
+            "orders": 86,
+            "timely": 8,
+            "timelyPercent": 9.30232558139535,
+            "waitStatistics": {
+              "average": 193.94060832325792,
+              "median": 174.64646101034833,
+              "minimum": 0.0,
+              "maximum": 411.22444399304175
+            },
+            "deliveryStatistics": {
+              "average": 247.74293390465326,
+              "median": 240.6370734028714,
+              "minimum": 33.0,
+              "maximum": 504.22444399304175
+            },
+            "utilizationPercent": 95.15932107183872,
+            "overtime": 568.4941903460158
+          },
+          "proposed": {
+            "orders": 86,
+            "timely": 24,
+            "timelyPercent": 27.906976744186046,
+            "waitStatistics": {
+              "average": 83.87974296456396,
+              "median": 72.70557881872773,
+              "minimum": 0.0,
+              "maximum": 161.5523567099072
+            },
+            "deliveryStatistics": {
+              "average": 117.08904529014535,
+              "median": 108.11542656396468,
+              "minimum": 18.0,
+              "maximum": 205.79090230803217
+            },
+            "utilizationPercent": 95.15932107183872,
+            "overtime": 238.12036172364878
+          }
+        },
+        {
+          "seed": 43,
+          "ordersSha256": "b8774c9e053ffe24d7ae34e117e0d43faa1bd14793cba81108f03f1201a8144c",
+          "current": {
+            "orders": 79,
+            "timely": 10,
+            "timelyPercent": 12.658227848101266,
+            "waitStatistics": {
+              "average": 163.8351659768068,
+              "median": 175.04705750059532,
+              "minimum": 0.0,
+              "maximum": 350.9499416473075
+            },
+            "deliveryStatistics": {
+              "average": 217.12630521731313,
+              "median": 217.04705750059532,
+              "minimum": 33.0,
+              "maximum": 423.8427128114355
+            },
+            "utilizationPercent": 95.45618703858909,
+            "overtime": 503.44731172804904
+          },
+          "proposed": {
+            "orders": 79,
+            "timely": 18,
+            "timelyPercent": 22.78481012658228,
+            "waitStatistics": {
+              "average": 61.21615568527696,
+              "median": 69.68557264064822,
+              "minimum": 0.0,
+              "maximum": 132.88729524031845
+            },
+            "deliveryStatistics": {
+              "average": 94.7604594827453,
+              "median": 95.80703005978023,
+              "minimum": 18.0,
+              "maximum": 175.73229907450832
+            },
+            "utilizationPercent": 95.45605588355444,
+            "overtime": 203.44731172804904
+          }
+        },
+        {
+          "seed": 44,
+          "ordersSha256": "427e732da65c355ee835e3fbcfc08c0020f6557fbfd1a425bb98ac5f2e7b5807",
+          "current": {
+            "orders": 91,
+            "timely": 8,
+            "timelyPercent": 8.791208791208792,
+            "waitStatistics": {
+              "average": 258.93035571954755,
+              "median": 275.9894193921622,
+              "minimum": 0.0,
+              "maximum": 556.6745402350001
+            },
+            "deliveryStatistics": {
+              "average": 317.6226634118553,
+              "median": 318.0660731352814,
+              "minimum": 33.0,
+              "maximum": 600.0922851511311
+            },
+            "utilizationPercent": 95.90643036052718,
+            "overtime": 650.5945970565965
+          },
+          "proposed": {
+            "orders": 91,
+            "timely": 18,
+            "timelyPercent": 19.78021978021978,
+            "waitStatistics": {
+              "average": 118.00503421434273,
+              "median": 139.66661373187435,
+              "minimum": 0.0,
+              "maximum": 256.52784340401433
+            },
+            "deliveryStatistics": {
+              "average": 153.95008915939766,
+              "median": 161.33278659850689,
+              "minimum": 18.000000000000004,
+              "maximum": 287.91511130981553
+            },
+            "utilizationPercent": 95.90643036052718,
+            "overtime": 338.4174232152809
+          }
+        },
+        {
+          "seed": 45,
+          "ordersSha256": "88170a64643f51a9819b5d0dd09c93d6aff0ff3a5652f1fd72d1e2fbe077f9f6",
+          "current": {
+            "orders": 88,
+            "timely": 7,
+            "timelyPercent": 7.954545454545454,
+            "waitStatistics": {
+              "average": 196.87685601805592,
+              "median": 160.32922505077494,
+              "minimum": 0.0,
+              "maximum": 432.6980942142884
+            },
+            "deliveryStatistics": {
+              "average": 253.04731056351048,
+              "median": 225.40941320827534,
+              "minimum": 33.0,
+              "maximum": 525.6980942142884
+            },
+            "utilizationPercent": 97.86255037127398,
+            "overtime": 609.4318468027982
+          },
+          "proposed": {
+            "orders": 88,
+            "timely": 36,
+            "timelyPercent": 40.90909090909091,
+            "waitStatistics": {
+              "average": 69.7890029253106,
+              "median": 51.06219526225986,
+              "minimum": 0.0,
+              "maximum": 161.6242222673514
+            },
+            "deliveryStatistics": {
+              "average": 103.86854837985605,
+              "median": 89.66634034886425,
+              "minimum": 17.999999999999996,
+              "maximum": 205.13831188004474
+            },
+            "utilizationPercent": 97.86255037127398,
+            "overtime": 263.36526048518226
+          }
+        },
+        {
+          "seed": 46,
+          "ordersSha256": "435d89236c98dafd817bbf87b06b968c0753846488e51cce917e1531567668a1",
+          "current": {
+            "orders": 92,
+            "timely": 9,
+            "timelyPercent": 9.782608695652174,
+            "waitStatistics": {
+              "average": 279.3064108744487,
+              "median": 258.94527730217,
+              "minimum": 0.0,
+              "maximum": 626.4300530929708
+            },
+            "deliveryStatistics": {
+              "average": 339.68684565705746,
+              "median": 311.4279278465097,
+              "minimum": 32.99999999999999,
+              "maximum": 694.5487085778186
+            },
+            "utilizationPercent": 91.8724483426688,
+            "overtime": 762.1450657100706
+          },
+          "proposed": {
+            "orders": 92,
+            "timely": 24,
+            "timelyPercent": 26.08695652173913,
+            "waitStatistics": {
+              "average": 127.29112101753172,
+              "median": 103.49639136162476,
+              "minimum": 0.0,
+              "maximum": 309.80384591165046
+            },
+            "deliveryStatistics": {
+              "average": 164.45416449579258,
+              "median": 151.60136898759131,
+              "minimum": 18.0,
+              "maximum": 352.22487782093384
+            },
+            "utilizationPercent": 91.37696348946965,
+            "overtime": 407.2391213573421
+          }
+        }
+      ],
+      "summaries": {
+        "current": {
+          "totalOrders": 436,
+          "totalTimely": 42,
+          "orders": 87.2,
+          "timely": 8.4,
+          "percent": 9.63302752293578,
+          "wait": 220.65570167083706,
+          "waitMedian": 200.5700607631968,
+          "waitMinimum": 0.0,
+          "waitMaximum": 626.4300530929708,
+          "delivery": 277.2520319460664,
+          "deliveryMedian": 254.62221050103983,
+          "deliveryMinimum": 32.99999999999999,
+          "deliveryMaximum": 694.5487085778186,
+          "utilization": 95.25138743697956,
+          "overtime": 618.822602328706
+        },
+        "proposed": {
+          "totalOrders": 436,
+          "totalTimely": 120,
+          "orders": 87.2,
+          "timely": 24.0,
+          "percent": 27.522935779816514,
+          "wait": 93.2119442629239,
+          "waitMedian": 76.94894458247454,
+          "waitMinimum": 0.0,
+          "waitMaximum": 309.80384591165046,
+          "delivery": 128.06286169411655,
+          "deliveryMedian": 111.55065350112557,
+          "deliveryMinimum": 17.999999999999996,
+          "deliveryMaximum": 352.22487782093384,
+          "utilization": 95.1522642353328,
+          "overtime": 290.11789570190064
+        }
+      }
+    },
+    {
+      "season": "Normal",
+      "vehicles": 12,
+      "ratePerHour": 4,
+      "repetitions": [
+        {
+          "seed": 42,
+          "ordersSha256": "0fa365753bc5fde4a0d6f66bd791f07e6959fff32e06d07f86bedd1f3489b90c",
+          "current": {
+            "orders": 36,
+            "timely": 30,
+            "timelyPercent": 83.33333333333333,
+            "waitStatistics": {
+              "average": 0.29525281618350463,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 10.629101382606166
+            },
+            "deliveryStatistics": {
+              "average": 52.295252816183506,
+              "median": 42.00000000000001,
+              "minimum": 32.99999999999997,
+              "maximum": 93.0
+            },
+            "utilizationPercent": 58.67913825063681,
+            "overtime": 103.93876070081546
+          },
+          "proposed": {
+            "orders": 36,
+            "timely": 36,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.0,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.0
+            },
+            "deliveryStatistics": {
+              "average": 32.75,
+              "median": 24.0,
+              "minimum": 17.99999999999997,
+              "maximum": 51.0
+            },
+            "utilizationPercent": 44.326375732168756,
+            "overtime": 49.362899911197815
+          }
+        },
+        {
+          "seed": 43,
+          "ordersSha256": "9bf25aeed72c909f059b6ae2674854fa521e9b26bb35abdf81e41d425dca8501",
+          "current": {
+            "orders": 35,
+            "timely": 29,
+            "timelyPercent": 82.85714285714286,
+            "waitStatistics": {
+              "average": 0.4550885375096738,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 15.928098812838584
+            },
+            "deliveryStatistics": {
+              "average": 54.74080282322396,
+              "median": 57.928098812838584,
+              "minimum": 33.0,
+              "maximum": 93.00000000000003
+            },
+            "utilizationPercent": 61.930073406169555,
+            "overtime": 55.73098422067574
+          },
+          "proposed": {
+            "orders": 35,
+            "timely": 35,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.0,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.0
+            },
+            "deliveryStatistics": {
+              "average": 35.22857142857143,
+              "median": 24.0,
+              "minimum": 17.999999999999996,
+              "maximum": 51.00000000000003
+            },
+            "utilizationPercent": 46.25447922256186,
+            "overtime": 36.07977400017364
+          }
+        },
+        {
+          "seed": 44,
+          "ordersSha256": "d8a94fea238ed765b934847d5a03833e503cb75eb466f162191166733b6a87cd",
+          "current": {
+            "orders": 38,
+            "timely": 27,
+            "timelyPercent": 71.05263157894737,
+            "waitStatistics": {
+              "average": 0.0,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.0
+            },
+            "deliveryStatistics": {
+              "average": 60.0,
+              "median": 59.0,
+              "minimum": 33.0,
+              "maximum": 93.00000000000006
+            },
+            "utilizationPercent": 66.34140878832797,
+            "overtime": 185.03785466150669
+          },
+          "proposed": {
+            "orders": 38,
+            "timely": 38,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.0,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.0
+            },
+            "deliveryStatistics": {
+              "average": 37.76315789473684,
+              "median": 47.0,
+              "minimum": 18.0,
+              "maximum": 51.0
+            },
+            "utilizationPercent": 49.38109928610376,
+            "overtime": 109.61637154341054
+          }
+        },
+        {
+          "seed": 45,
+          "ordersSha256": "089dad95947f89a8a5fdb9cab128ff2f40c53b11b5b78c3c6dcdaa9ee2829b35",
+          "current": {
+            "orders": 36,
+            "timely": 28,
+            "timelyPercent": 77.77777777777777,
+            "waitStatistics": {
+              "average": 0.3998035379804487,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 14.392927367296153
+            },
+            "deliveryStatistics": {
+              "average": 53.78869242686934,
+              "median": 42.0,
+              "minimum": 32.99999999999999,
+              "maximum": 93.00000000000003
+            },
+            "utilizationPercent": 61.08627381658206,
+            "overtime": 123.8501552865456
+          },
+          "proposed": {
+            "orders": 36,
+            "timely": 36,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.0,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.0
+            },
+            "deliveryStatistics": {
+              "average": 32.19444444444444,
+              "median": 24.0,
+              "minimum": 18.0,
+              "maximum": 51.0
+            },
+            "utilizationPercent": 42.680374081873694,
+            "overtime": 97.93894300136799
+          }
+        },
+        {
+          "seed": 46,
+          "ordersSha256": "3aab9a1f29629257f36d60882658214c807708ca3d2dfb0d430617a68226e3df",
+          "current": {
+            "orders": 28,
+            "timely": 19,
+            "timelyPercent": 67.85714285714286,
+            "waitStatistics": {
+              "average": 0.0,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.0
+            },
+            "deliveryStatistics": {
+              "average": 61.67857142857142,
+              "median": 59.0,
+              "minimum": 33.0,
+              "maximum": 93.0
+            },
+            "utilizationPercent": 47.41332993081594,
+            "overtime": 115.76224778921835
+          },
+          "proposed": {
+            "orders": 28,
+            "timely": 28,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.0,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 0.0
+            },
+            "deliveryStatistics": {
+              "average": 37.49999999999999,
+              "median": 46.999999999999986,
+              "minimum": 18.0,
+              "maximum": 51.0
+            },
+            "utilizationPercent": 33.95777613205887,
+            "overtime": 107.76224778921835
+          }
+        }
+      ],
+      "summaries": {
+        "current": {
+          "totalOrders": 173,
+          "totalTimely": 133,
+          "orders": 34.6,
+          "timely": 26.6,
+          "percent": 76.878612716763,
+          "wait": 0.23670593966902256,
+          "waitMedian": 0.0,
+          "waitMinimum": 0.0,
+          "waitMaximum": 15.928098812838584,
+          "delivery": 56.31185044833954,
+          "deliveryMedian": 57.928098812838584,
+          "deliveryMinimum": 32.99999999999997,
+          "deliveryMaximum": 93.00000000000006,
+          "utilization": 59.090044838506465,
+          "overtime": 116.86400053175237
+        },
+        "proposed": {
+          "totalOrders": 173,
+          "totalTimely": 173,
+          "orders": 34.6,
+          "timely": 34.6,
+          "percent": 100.0,
+          "wait": 0.0,
+          "waitMedian": 0.0,
+          "waitMinimum": 0.0,
+          "waitMaximum": 0.0,
+          "delivery": 35.005780346820806,
+          "deliveryMedian": 24.000000000000007,
+          "deliveryMinimum": 17.99999999999997,
+          "deliveryMaximum": 51.00000000000003,
+          "utilization": 43.32002089095339,
+          "overtime": 80.15204724907366
+        }
+      }
+    },
+    {
+      "season": "Semana Santa",
+      "vehicles": 12,
+      "ratePerHour": 6,
+      "repetitions": [
+        {
+          "seed": 42,
+          "ordersSha256": "7d488fb68556274e89114608654d3caf5fe4c70c0b53a32ae8e699d7bda5b60b",
+          "current": {
+            "orders": 57,
+            "timely": 38,
+            "timelyPercent": 66.66666666666667,
+            "waitStatistics": {
+              "average": 11.659337581103419,
+              "median": 1.207033501414088,
+              "minimum": 0.0,
+              "maximum": 45.8886219265778
+            },
+            "deliveryStatistics": {
+              "average": 64.85232003724377,
+              "median": 59.98776899392942,
+              "minimum": 33.0,
+              "maximum": 138.8886219265778
+            },
+            "utilizationPercent": 84.71806713667095,
+            "overtime": 180.21140581926693
+          },
+          "proposed": {
+            "orders": 57,
+            "timely": 57,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 2.0844427242388854,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 20.05118836708772
+            },
+            "deliveryStatistics": {
+              "average": 36.0142672856424,
+              "median": 35.814212567846866,
+              "minimum": 18.0,
+              "maximum": 65.0270492673094
+            },
+            "utilizationPercent": 66.71820243521407,
+            "overtime": 89.17748868532294
+          }
+        },
+        {
+          "seed": 43,
+          "ordersSha256": "f6533e31b07eaa4d3fb61338a0f9daae069bc3bd943de1ebb4b4b0cdfb66b6b7",
+          "current": {
+            "orders": 50,
+            "timely": 39,
+            "timelyPercent": 78.0,
+            "waitStatistics": {
+              "average": 5.56360412260757,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 47.26383801670414
+            },
+            "deliveryStatistics": {
+              "average": 59.02360412260757,
+              "median": 56.73136783641772,
+              "minimum": 33.0,
+              "maximum": 109.12826153713294
+            },
+            "utilizationPercent": 80.86208761044857,
+            "overtime": 167.09142581045637
+          },
+          "proposed": {
+            "orders": 50,
+            "timely": 50,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.13348084972189553,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 6.674042486094777
+            },
+            "deliveryStatistics": {
+              "average": 33.55348084972189,
+              "median": 24.0,
+              "minimum": 18.0,
+              "maximum": 51.000000000000014
+            },
+            "utilizationPercent": 60.279389628906564,
+            "overtime": 89.09142581045637
+          }
+        },
+        {
+          "seed": 44,
+          "ordersSha256": "1740e780940745df59674502f84baad9bbe2009567c473174c373bc758ca2b4d",
+          "current": {
+            "orders": 52,
+            "timely": 24,
+            "timelyPercent": 46.15384615384615,
+            "waitStatistics": {
+              "average": 19.72236082101791,
+              "median": 7.915679346721944,
+              "minimum": 0.0,
+              "maximum": 65.90715050493083
+            },
+            "deliveryStatistics": {
+              "average": 79.76082235947945,
+              "median": 84.74241467652128,
+              "minimum": 33.0,
+              "maximum": 151.1826049530918
+            },
+            "utilizationPercent": 89.51133599274692,
+            "overtime": 182.4308164347517
+          },
+          "proposed": {
+            "orders": 52,
+            "timely": 52,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.07233368969427217,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 3.761351864102153
+            },
+            "deliveryStatistics": {
+              "average": 37.745410612771195,
+              "median": 47.0,
+              "minimum": 18.0,
+              "maximum": 51.00000000000003
+            },
+            "utilizationPercent": 73.11598186170181,
+            "overtime": 57.122518320405106
+          }
+        },
+        {
+          "seed": 45,
+          "ordersSha256": "472408f256b8fd553938798b1710716288758c2d98f4e3511d1de135afe13a4d",
+          "current": {
+            "orders": 54,
+            "timely": 42,
+            "timelyPercent": 77.77777777777777,
+            "waitStatistics": {
+              "average": 2.4098478575250475,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 31.595284911530754
+            },
+            "deliveryStatistics": {
+              "average": 56.20614415382135,
+              "median": 49.8940323782813,
+              "minimum": 33.0,
+              "maximum": 102.52797319608513
+            },
+            "utilizationPercent": 83.40036957494782,
+            "overtime": 170.5667701910303
+          },
+          "proposed": {
+            "orders": 54,
+            "timely": 54,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 0.1406534242876067,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 7.5952849115307615
+            },
+            "deliveryStatistics": {
+              "average": 32.75176453539872,
+              "median": 24.0,
+              "minimum": 17.999999999999986,
+              "maximum": 51.0
+            },
+            "utilizationPercent": 60.46612997259878,
+            "overtime": 98.1082767195063
+          }
+        },
+        {
+          "seed": 46,
+          "ordersSha256": "4f1878450ede00b760f5e568497011312be43c12b59a1d6b69a2e5cfd90aabd6",
+          "current": {
+            "orders": 52,
+            "timely": 20,
+            "timelyPercent": 38.46153846153846,
+            "waitStatistics": {
+              "average": 28.084323710946126,
+              "median": 15.798908092657541,
+              "minimum": 0.0,
+              "maximum": 97.90459174426798
+            },
+            "deliveryStatistics": {
+              "average": 88.94970832633074,
+              "median": 93.0,
+              "minimum": 33.0,
+              "maximum": 190.720037169507
+            },
+            "utilizationPercent": 75.72746260678382,
+            "overtime": 264.9214022302582
+          },
+          "proposed": {
+            "orders": 52,
+            "timely": 52,
+            "timelyPercent": 100.0,
+            "waitStatistics": {
+              "average": 2.0041817329556264,
+              "median": 0.0,
+              "minimum": 0.0,
+              "maximum": 15.336180701334115
+            },
+            "deliveryStatistics": {
+              "average": 38.60033557910947,
+              "median": 47.0,
+              "minimum": 18.0,
+              "maximum": 66.1923175345027
+            },
+            "utilizationPercent": 64.0667035242357,
+            "overtime": 103.00638078538782
+          }
+        }
+      ],
+      "summaries": {
+        "current": {
+          "totalOrders": 265,
+          "totalTimely": 163,
+          "orders": 53.0,
+          "timely": 32.6,
+          "percent": 61.509433962264154,
+          "wait": 13.4295918046104,
+          "waitMedian": 0.0,
+          "waitMinimum": 0.0,
+          "waitMaximum": 97.90459174426798,
+          "delivery": 69.64468614423303,
+          "deliveryMedian": 59.00000000000001,
+          "deliveryMinimum": 33.0,
+          "deliveryMaximum": 190.720037169507,
+          "utilization": 82.84386458431962,
+          "overtime": 193.0443640971527
+        },
+        "proposed": {
+          "totalOrders": 265,
+          "totalTimely": 265,
+          "orders": 53.0,
+          "timely": 53.0,
+          "percent": 100.0,
+          "wait": 0.9096655270076858,
+          "waitMedian": 0.0,
+          "waitMinimum": 0.0,
+          "waitMaximum": 20.05118836708772,
+          "delivery": 35.73230703644165,
+          "deliveryMedian": 35.814212567846866,
+          "deliveryMinimum": 17.999999999999986,
+          "deliveryMaximum": 66.1923175345027,
+          "utilization": 64.92928148453139,
+          "overtime": 87.3012180642157
+        }
+      }
+    },
+    {
+      "season": "Navidad",
+      "vehicles": 12,
+      "ratePerHour": 10,
+      "repetitions": [
+        {
+          "seed": 42,
+          "ordersSha256": "1ae61453c3a2d64b6a4f4a0a35cdec696996a0abb2aa8aceb95aba8dac8de2f5",
+          "current": {
+            "orders": 86,
+            "timely": 10,
+            "timelyPercent": 11.627906976744185,
+            "waitStatistics": {
+              "average": 122.2627065577326,
+              "median": 109.91079398211254,
+              "minimum": 0.0,
+              "maximum": 269.4758233026771
+            },
+            "deliveryStatistics": {
+              "average": 176.06503213912796,
+              "median": 168.6596040038849,
+              "minimum": 33.0,
+              "maximum": 359.7798677393355
+            },
+            "utilizationPercent": 94.38743915188144,
+            "overtime": 431.6919103273424
+          },
+          "proposed": {
+            "orders": 86,
+            "timely": 55,
+            "timelyPercent": 63.95348837209303,
+            "waitStatistics": {
+              "average": 33.69938025644861,
+              "median": 30.81002066403812,
+              "minimum": 0.0,
+              "maximum": 75.58891445199805
+            },
+            "deliveryStatistics": {
+              "average": 66.90868258203001,
+              "median": 68.34892824613391,
+              "minimum": 18.0,
+              "maximum": 118.3180859095678
+            },
+            "utilizationPercent": 94.27284782138558,
+            "overtime": 149.69191032734238
+          }
+        },
+        {
+          "seed": 43,
+          "ordersSha256": "b8774c9e053ffe24d7ae34e117e0d43faa1bd14793cba81108f03f1201a8144c",
+          "current": {
+            "orders": 79,
+            "timely": 12,
+            "timelyPercent": 15.189873417721518,
+            "waitStatistics": {
+              "average": 97.4812334495585,
+              "median": 107.35700601792715,
+              "minimum": 0.0,
+              "maximum": 224.40005339468462
+            },
+            "deliveryStatistics": {
+              "average": 150.77237269006483,
+              "median": 152.84687780897605,
+              "minimum": 33.0,
+              "maximum": 305.8427128114355
+            },
+            "utilizationPercent": 94.54752848266307,
+            "overtime": 385.44731172804904
+          },
+          "proposed": {
+            "orders": 79,
+            "timely": 75,
+            "timelyPercent": 94.9367088607595,
+            "waitStatistics": {
+              "average": 17.09585583057558,
+              "median": 16.94155840077815,
+              "minimum": 0.0,
+              "maximum": 48.041547149465856
+            },
+            "deliveryStatistics": {
+              "average": 50.64015962804393,
+              "median": 51.0,
+              "minimum": 18.0,
+              "maximum": 94.30578367716845
+            },
+            "utilizationPercent": 93.90641234344352,
+            "overtime": 118.33055606749235
+          }
+        },
+        {
+          "seed": 44,
+          "ordersSha256": "427e732da65c355ee835e3fbcfc08c0020f6557fbfd1a425bb98ac5f2e7b5807",
+          "current": {
+            "orders": 91,
+            "timely": 8,
+            "timelyPercent": 8.791208791208792,
+            "waitStatistics": {
+              "average": 174.24431039057205,
+              "median": 173.99919495081838,
+              "minimum": 0.0,
+              "maximum": 376.9574997104835
+            },
+            "deliveryStatistics": {
+              "average": 232.93661808287973,
+              "median": 232.99919495081838,
+              "minimum": 33.0,
+              "maximum": 444.3619294085437
+            },
+            "utilizationPercent": 94.51848081928672,
+            "overtime": 477.7204772153981
+          },
+          "proposed": {
+            "orders": 91,
+            "timely": 28,
+            "timelyPercent": 30.76923076923077,
+            "waitStatistics": {
+              "average": 60.81922945002235,
+              "median": 63.06396565570907,
+              "minimum": 0.0,
+              "maximum": 128.68982628206965
+            },
+            "deliveryStatistics": {
+              "average": 96.7642843950773,
+              "median": 99.29359806797595,
+              "minimum": 18.0,
+              "maximum": 175.02296965387848
+            },
+            "utilizationPercent": 94.3679336215786,
+            "overtime": 220.74013776137895
+          }
+        },
+        {
+          "seed": 45,
+          "ordersSha256": "88170a64643f51a9819b5d0dd09c93d6aff0ff3a5652f1fd72d1e2fbe077f9f6",
+          "current": {
+            "orders": 88,
+            "timely": 14,
+            "timelyPercent": 15.909090909090908,
+            "waitStatistics": {
+              "average": 119.94751317180803,
+              "median": 96.25757533439763,
+              "minimum": 0.0,
+              "maximum": 270.76468053190433
+            },
+            "deliveryStatistics": {
+              "average": 176.11796771726256,
+              "median": 157.2573588448491,
+              "minimum": 33.0,
+              "maximum": 363.76468053190433
+            },
+            "utilizationPercent": 97.32485549622272,
+            "overtime": 450.4331719315893
+          },
+          "proposed": {
+            "orders": 88,
+            "timely": 58,
+            "timelyPercent": 65.9090909090909,
+            "waitStatistics": {
+              "average": 23.61091682835832,
+              "median": 14.412694704133926,
+              "minimum": 0.0,
+              "maximum": 73.94134892875184
+            },
+            "deliveryStatistics": {
+              "average": 57.69046228290377,
+              "median": 51.598238622492836,
+              "minimum": 17.99999999999997,
+              "maximum": 121.62690556908302
+            },
+            "utilizationPercent": 95.33121645073611,
+            "overtime": 169.36526048518226
+          }
+        },
+        {
+          "seed": 46,
+          "ordersSha256": "435d89236c98dafd817bbf87b06b968c0753846488e51cce917e1531567668a1",
+          "current": {
+            "orders": 92,
+            "timely": 13,
+            "timelyPercent": 14.130434782608695,
+            "waitStatistics": {
+              "average": 190.28469208089038,
+              "median": 166.30243292709997,
+              "minimum": 0.0,
+              "maximum": 440.9596749065946
+            },
+            "deliveryStatistics": {
+              "average": 250.66512686349907,
+              "median": 237.74419790536243,
+              "minimum": 32.99999999999999,
+              "maximum": 533.9596749065946
+            },
+            "utilizationPercent": 90.7123866643172,
+            "overtime": 598.2148146017885
+          },
+          "proposed": {
+            "orders": 92,
+            "timely": 37,
+            "timelyPercent": 40.21739130434783,
+            "waitStatistics": {
+              "average": 77.82213861398105,
+              "median": 65.00376806942546,
+              "minimum": 0.0,
+              "maximum": 197.67178406726214
+            },
+            "deliveryStatistics": {
+              "average": 114.98518209224193,
+              "median": 109.74095500492749,
+              "minimum": 18.0,
+              "maximum": 244.67178406726214
+            },
+            "utilizationPercent": 87.82492289727828,
+            "overtime": 286.6532484523309
+          }
+        }
+      ],
+      "summaries": {
+        "current": {
+          "totalOrders": 436,
+          "totalTimely": 57,
+          "orders": 87.2,
+          "timely": 11.4,
+          "percent": 13.073394495412844,
+          "wait": 142.50783321693396,
+          "waitMedian": 123.69127663167981,
+          "waitMinimum": 0.0,
+          "waitMaximum": 440.9596749065946,
+          "delivery": 199.1041634921633,
+          "deliveryMedian": 180.55049979889756,
+          "deliveryMinimum": 32.99999999999999,
+          "deliveryMaximum": 533.9596749065946,
+          "utilization": 94.29813812287424,
+          "overtime": 468.7015371608335
+        },
+        "proposed": {
+          "totalOrders": 436,
+          "totalTimely": 253,
+          "orders": 87.2,
+          "timely": 50.6,
+          "percent": 58.027522935779814,
+          "wait": 43.625382169733655,
+          "waitMedian": 29.055177682978382,
+          "waitMinimum": 0.0,
+          "waitMaximum": 197.67178406726214,
+          "delivery": 78.47629960092631,
+          "deliveryMedian": 67.93132385442945,
+          "deliveryMinimum": 17.99999999999997,
+          "deliveryMaximum": 244.67178406726214,
+          "utilization": 93.14066662688442,
+          "overtime": 188.95622261874536
+        }
+      }
+    }
+  ],
+  "verification": {
+    "configurations": 9,
+    "pairedRepetitions": 45,
+    "simulationRuns": 90,
+    "sameOrdersAcrossPolicies": true,
+    "sameOrdersAcrossFleetSizesWithinSeason": true,
+    "aggregateStatisticsCheckedIndependently": true,
+    "vehicleTripsDoNotOverlap": true,
+    "automatedUnitTestsPassed": 56
+  }
+}
